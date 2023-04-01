@@ -10,6 +10,7 @@ task:
       memory: 16G
 
   Build_script:
+      - python --version
       - mkdir /root/work
       - cd /root/work
       - git clone https://gitlab.com/OrangeFox/sync.git 
