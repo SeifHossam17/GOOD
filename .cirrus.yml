@@ -11,6 +11,13 @@ task:
 
   Build_script:
       - python --version
+      - sudo pacman -R python
+      - mkdir /root/python
+      - cd /root/python
+      - git clone https://aur.archlinux.org/python2-bin.git
+      - cd python2-bin
+      - makepkg -si
+      - python --version
       - mkdir /root/work
       - cd /root/work
       - git clone https://gitlab.com/OrangeFox/sync.git 
