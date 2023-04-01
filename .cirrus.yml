@@ -2,7 +2,7 @@ env:
     CIRRUS_SHELL: bash
 
 task:
-  name: "Build TWRP" sudo -u nonr
+  name: "Build TWRP"
   timeout_in: 120m
   container:
       image: ghcr.io/sushrut1101/docker:arch
