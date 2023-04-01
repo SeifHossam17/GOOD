@@ -6,8 +6,8 @@ task:
   timeout_in: 120m
   container:
       image: ghcr.io/sushrut1101/docker:arch
-      cpu: 4
-      memory: 8G
+      cpu: 8
+      memory: 16G
 
   Build_script:
       - mkdir /root/work
@@ -20,5 +20,5 @@ task:
       - bash -c "source build/envsetup.sh export ALLOW_MISSING_DEPENDENCIES=true export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1 export LC_ALL="C" lunch omni_whyred-eng && mka recoveryimage -j4  "
       - repo sync -j4
       - export ALLOW_MISSING_DEPENDENCIES=true
-      - bash -c "source ./build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage"
+      - bash -c "source ./build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage -j8"
 
