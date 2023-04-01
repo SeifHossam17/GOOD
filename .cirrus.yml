@@ -12,11 +12,11 @@ task:
   Build_script:
       - python --version
       - useradd -m nonroot
-      - mkdir /root/python
       - cd /home/nonroot
       - sudo -u nonroot git clone https://aur.archlinux.org/python2-bin.git
       - cd python2-bin
-      - sudo -u nonroot makepkg -si
+      - sudo -u nonroot makepkg -s
+      - pacman -U python2-bin-2.7.18_1-1-x86_64.pkg.tar.zst
       - rm -rf /usr/bin/python
       - ln -s /usr/bin/python2 /usr/bin/python
       - python --version
