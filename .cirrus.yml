@@ -12,7 +12,11 @@ task:
   Build_script:
       - mkdir /root/work
       - cd /root/work
-      - repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-9.0 --depth=1
+      - git clone https://gitlab.com/OrangeFox/sync.git
+      - bash ./legacy/orangefox_sync_legacy.sh --branch fox_9.0 --path /root/ofox
+      - cd /root/ofox
+      - git clone https://gitlab.com/OrangeFox/device/whyred.git device/xiaomi/whyred
+      - bash -c "source build/envsetup.sh export ALLOW_MISSING_DEPENDENCIES=true export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1 export LC_ALL="C" lunch omni_whyred-eng && mka recoveryimage -j4  "
       - repo sync -j4
       - export ALLOW_MISSING_DEPENDENCIES=true
       - bash -c "source ./build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage"
