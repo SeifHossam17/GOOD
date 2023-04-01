@@ -2,7 +2,7 @@ env:
     CIRRUS_SHELL: bash
 
 task:
-  name: "Build TWRP"
+  name: "Build TWRP" sudo -u nonr
   timeout_in: 120m
   container:
       image: ghcr.io/sushrut1101/docker:arch
@@ -11,11 +11,12 @@ task:
 
   Build_script:
       - python --version
+      - sudo pacman -S sudo
       - mkdir /root/python
       - cd /root/python
       - git clone https://aur.archlinux.org/python2-bin.git
       - cd python2-bin
-      - makepkg -si
+      - sudo -u nonroot makepkg -si
       - rm -rf /usr/bin/python
       - ln -s /usr/bin/python2 /usr/bin/python
       - python --version
