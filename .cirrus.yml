@@ -1,0 +1,17 @@
+env:
+    CIRRUS_SHELL: bash
+
+task:
+  name: "Build TWRP"
+  timeout_in: 120m
+  container:
+      image: ghcr.io/sushrut1101/docker:arch
+      cpu: 4
+      memory: 8G
+  Build:
+    - repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-9.0 --depth=1
+    - repo sync -j4
+    - export ALLOW_MISSING_DEPENDENCIES=true
+    - build/envsetup.sh
+    - lunch omni-whyred-eng
+    - mka recoveryimage
