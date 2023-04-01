@@ -17,4 +17,4 @@ task:
       - bash ./legacy/orangefox_sync_legacy.sh --branch 9.0 --path /root/ofox
       - cd /root/ofox
       - git clone https://gitlab.com/OrangeFox/device/whyred.git device/xiaomi/whyred
-      - bash -c "source build/envsetup.sh && export ALLOW_MISSING_DEPENDENCIES=true export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1 export LC_ALL="C" lunch omni_whyred-eng && export ALLOW_MISSING_DEPENDENCIES=true export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1 export LC_ALL="C" mka recoveryimage"
+      - bash -c "source build/envsetup.sh && export ALLOW_MISSING_DEPENDENCIES=true export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1 lunch omni_whyred-eng && export ALLOW_MISSING_DEPENDENCIES=true export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1 mka recoveryimage"
