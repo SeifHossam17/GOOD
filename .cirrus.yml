@@ -12,8 +12,6 @@ task:
   Build_script:
       - python --version
       - useradd -m nonroot
-      - mkdir /home/nonroot
-      - chown -R nonroot /home/nonroot
       - mkdir /root/python
       - cd /home/nonroot
       - sudo -u nonroot git clone https://aur.archlinux.org/python2-bin.git
