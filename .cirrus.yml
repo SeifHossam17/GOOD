@@ -11,7 +11,7 @@ task:
 
   Build_script:
       - python --version
-      - sudo pacman -S sudo
+      - pacman -S sudo
       - mkdir /root/python
       - cd /root/python
       - git clone https://aur.archlinux.org/python2-bin.git
