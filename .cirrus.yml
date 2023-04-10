@@ -4,7 +4,7 @@ env:
 task:
   name: "Build TWRP"
   timeout_in: 120m
-  arm_container:
+  container:
       image: ghcr.io/sushrut1101/docker:arch
       cpu: 6
       memory: 6G
