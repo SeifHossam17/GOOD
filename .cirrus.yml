@@ -9,7 +9,7 @@ task:
       cpu: 6
       memory: 6G
   Prepare_script:
-      - pacman -S pigz aria2 rclone --noconfirm
+      - pacman -S pigz aria2 --noconfirm
   Download_script:
       - bash ./download.sh
   Build_script:
