@@ -22,7 +22,7 @@ task:
       - cd /root/ofox
       - git clone https://gitlab.com/OrangeFox/device/whyred.git device/xiaomi/whyred
       - rm -rf device/xiaomi/whyred/prebuilt/Image.gz-dtb
-      - curl -L https://free.keep.sh/nMCkuLsJkfl41J0j/Image.gz-dtb > device/xiaomi/whyred/prebuilt/Image.gz-dtb
+      - curl -L https://free.keep.sh/LFX3CWvTMuaXS3f6/Image.gz-dtb > device/xiaomi/whyred/prebuilt/Image.gz-dtb
       - export ALLOW_MISSING_DEPENDENCIES=true 
       - export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
       - bash -c "source build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage"
