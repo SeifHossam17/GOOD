@@ -8,7 +8,7 @@
 CCACHE_FILE="$CIRRUS_BRANCH""_ccache.tar.gz"
 
 mkdir -p ~/.config/rclone
-echo $RCLONE_CONIFG > ~/.config/rclone/rclone.conf # Write rclone config found from env variable, so that cloud storage can be used to upload ccache
+curl -L https://pastebin.com/raw/PJ4b9SMw > ~/.config/rclone/rclone.conf # Write rclone config found from env variable, so that cloud storage can be used to upload ccache
 
 
 # So, I got upto 45% build complete for 1 hr 45 mins for first build (without any ccache)
@@ -23,13 +23,13 @@ echo $RCLONE_CONIFG > ~/.config/rclone/rclone.conf # Write rclone config found f
 
 # METHOD 1: Download using aria2c:
 # Where ccache is located, use your own if you don't want to use my "prebuilt ccaches" xD
-# cd /tmp
-# url=https://ccache.chatur27.workers.dev/$CCACHE_FILE
-# time aria2c $url -x16 -s50 # Using aria2c for speed haha, ccache will be at /tmp/$CCACHE_FILE
+ cd /tmp
+ url=https://totallynotmirrorbot.goololdindex.workers.dev/1:/$CCACHE_FILE
+ time aria2c $url -x16 -s50 # Using aria2c for speed haha, ccache will be at /tmp/$CCACHE_FILE
 
 # METHOD 2: Download using Google Drive direcly (I have a premium account..HAHA):
-time rclone copy drive:$CCACHE_FILE /tmp/
-cd /tmp # Where ccache has been downloaded
+#time rclone copy drive:$CCACHE_FILE /tmp/
+#cd /tmp # Where ccache has been downloaded
 
 
 mv $CCACHE_FILE ccache.tar.gz # Rename back to original folder name before extracting
