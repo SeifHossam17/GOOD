@@ -8,7 +8,7 @@
 CCACHE_FILE="$CIRRUS_BRANCH""_ccache.tar.gz"
 
 mkdir -p ~/.config/rclone
-echo "" > ~/.config/rclone/rclone.conf # Write rclone config found from env variable, so that cloud storage can be used to upload ccache
+echo $RCLONE_CONIFG > ~/.config/rclone/rclone.conf # Write rclone config found from env variable, so that cloud storage can be used to upload ccache
 
 
 # So, I got upto 45% build complete for 1 hr 45 mins for first build (without any ccache)
