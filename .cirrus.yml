@@ -1,6 +1,5 @@
 env:
     CIRRUS_SHELL: bash
-    RCLONE_CONFIG: "ENCRYPTED[!55f2dbd96fe337fd95485ff73d9638f19545825a2cb11fe45e4f3ee1df56033a0af7861afdf810c1f275674e4d3be9ed!]"
 task:
   name: "Build TWRP"
   timeout_in: 120m
