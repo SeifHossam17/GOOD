@@ -7,7 +7,7 @@ task:
   container:
       image: ghcr.io/sushrut1101/docker:arch
       cpu: 6
-      memory: 16G
+      memory: 6G
   Prepare_script:
       - pacman -S pigz aria2 rclone --noconfirm
   Download_script:
