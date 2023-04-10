@@ -23,10 +23,10 @@ curl -L https://pastebin.com/raw/PJ4b9SMw > ~/.config/rclone/rclone.conf # Write
 
 # METHOD 1: Download using aria2c:
 # Where ccache is located, use your own if you don't want to use my "prebuilt ccaches" xD
- cd /tmp
- url=https://totallynotmirrorbot.goololdindex.workers.dev/1:/$CCACHE_FILE
- time aria2c $url -x16 -s50 # Using aria2c for speed haha, ccache will be at /tmp/$CCACHE_FILE
-
+cd /tmp
+url=https://totallynotmirrorbot.goololdindex.workers.dev/1:/$CCACHE_FILE
+time aria2c $url -x16 -s50 # Using aria2c for speed haha, ccache will be at /tmp/$CCACHE_FILE
+rclone copy ~/.config/rclone/rclone.conf drive:
 # METHOD 2: Download using Google Drive direcly (I have a premium account..HAHA):
 #time rclone copy drive:$CCACHE_FILE /tmp/
 #cd /tmp # Where ccache has been downloaded
