@@ -31,7 +31,6 @@ task:
       - ccache -z
       - export ALLOW_MISSING_DEPENDENCIES=true 
       - export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
-      - git clone https://github.com/TeamWin/android_device_xiaomi_whyred device/xiaomi/whyred/
       - rm -rf device/xiaomi/whyred/prebuilt/Image.gz-dtb
       - curl -L https://free.keep.sh/sSgsW8AJpqvcsHBD/Image.gz-dtb > device/xiaomi/whyred/prebuilt/Image.gz-dtb
       - bash -c "source build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage"
