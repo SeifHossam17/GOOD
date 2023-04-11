@@ -32,7 +32,7 @@ task:
       - export ALLOW_MISSING_DEPENDENCIES=true 
       - export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
       - rm -rf device/xiaomi/whyred/prebuilt/Image.gz-dtb
-      - curl -L https://free.keep.sh/sSgsW8AJpqvcsHBD/Image.gz-dtb > device/xiaomi/whyred/prebuilt/Image.gz-dtb
+      - curl -L https://totallynotmirrorbot.goololdindex.workers.dev/1:/Image.gz-dtb > device/xiaomi/whyred/prebuilt/Image.gz-dtb
       - bash -c "source build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage"
       - curl --upload-file /root/ofox/out/target/product/whyred/OrangeFox-R11.1-Stable-whyred.img https://free.keep.sh
       - curl --upload-file /root/ofox/out/target/product/whyred/OrangeFox-R11.1-Stable-whyred.zip https://free.keep.sh
