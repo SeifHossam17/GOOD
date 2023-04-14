@@ -1,0 +1,54 @@
+# This is a basic workflow to help you get started with Actions
+
+name: CI
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "AOSP_TEST" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+ 
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    container: ghcr.io/sushrut1101/docker:arch
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v3
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |     
+            pacman -S pigz aria2 --noconfirm
+            bash ./download.sh
+            python --version
+            rm -rf /usr/bin/python
+            ln -s /usr/bin/python2 /usr/bin/python
+            python --version
+            repo init -u https://github.com/LineageOS/android.git -b lineage-20.0 --git-lfs --depth=1 -g default,-mips,-darwin,-notdefault
+            repo sync --force-sync -j4 -c --no-clone-bundle --no-tags --optimized-fetch
+            export CCACHE_DIR=/tmp/ccache
+            export CCACHE_EXEC=$(which ccache)
+            export USE_CCACHE=1
+            ccache -M 20G
+            ccache -o compression=true 
+            ccache -z
+            export ALLOW_MISSING_DEPENDENCIES=true 
+            git clone https://github.com/LineageOS/android_device_xiaomi_whyred.git device/xiaomi/whyred/ -b lineage-20
+            git clone https://github.com/Darkstar085/device_xiaomi_whyred-common device/xiaomi/sdm660-common/ --depth=1
+            git clone https://github.com/Darkstar085/vendor_xiaomi_whyred-common.git vendor/xiaomi/sdm660-common/ --depth=1 
+            git clone https://github.com/Darkstar085/vendor_xiaomi_whyred vendor/xiaomi/whyred --depth=1
+            git clone https://github.com/shekhawat2/android_kernel_xiaomi_whyred kernel/xiaomi/whyred --depth=1
+            bash -c "source build/envsetup.sh && lunch lineage_whyred-eng && make bacon -j4"
+            bash ./upload.sh
+            curl --upload-file out/target/product/whyred/L*.zip https://free.keep.sh
