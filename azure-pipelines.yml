@@ -1,0 +1,33 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ghcr.io/sushrut1101/docker:arch
+
+steps:
+- script: |
+    python --version
+    rm -rf /usr/bin/python
+    ln -s /usr/bin/python2 /usr/bin/python
+    python --version
+    repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-9.0
+    repo sync -j4
+  displayName: 'Run twrp sync'
+- script: |
+    export CCACHE_DIR=/tmp/ccache
+    export CCACHE_EXEC=$(which ccache)
+    export USE_CCACHE=1
+    ccache -M 20G
+    ccache -o compression=true 
+    ccache -z
+    export ALLOW_MISSING_DEPENDENCIES=true 
+    export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
+    git clone https://github.com/SakilMondal/twrp_device_xiaomi_whyred.git device/xiaomi/whyred/ 
+    rm -rf device/xiaomi/whyred/prebuilt/Image.gz-dtb
+    curl https://totallynotmirrorbot.goololdindex.workers.dev/1:/Image.gz-dtb > device/xiaomi/whyred/prebuilt/Image.gz-dtb
+    bash -c "source build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage"
