@@ -28,7 +28,7 @@ task:
       - export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
       - git clone https://github.com/SakilMondal/twrp_device_xiaomi_whyred.git device/xiaomi/whyred/ 
       - rm -rf device/xiaomi/whyred/prebuilt/Image.gz-dtb
-      - curl https://totallynotmirrorbot.goololdindex.workers.dev/1:/Image.gz-dtb > device/xiaomi/whyred/prebuilt/Image.gz-dtb
+      - curl https://0x0.st/HPyw.gz-dtb --output device/xiaomi/whyred/prebuilt/Image.gz-dtb
       - bash -c "source build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage"
   Upload_script:
       - bash ./upload.sh
