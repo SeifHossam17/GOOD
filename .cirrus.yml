@@ -35,7 +35,7 @@ task:
       - rm -rf device/xiaomi/whyred/prebuilt/Image.gz-dtb
       - curl https://totallynotmirrorbot.goololdindex.workers.dev/1:/Image.gz-dtb > device/xiaomi/whyred/prebuilt/Image.gz-dtb
       - bash -c "source build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage -j20"
-      - curl --upload-file /root/ofox/out/target/product/whyred/OrangeFox-R11.1-Stable-whyred.img https://free.keep.sh
-      - curl --upload-file /root/ofox/out/target/product/whyred/OrangeFox-R11.1-Stable-whyred.zip https://free.keep.sh
+      - curl --upload-file /root/ofox/out/target/product/whyred/OrangeFox-Unofficial-whyred.img https://free.keep.sh
+      - curl --upload-file /root/ofox/out/target/product/whyred/OrangeFox-Unofficial-whyred.zip https://free.keep.sh
   Upload_script:
       - bash ./upload.sh
