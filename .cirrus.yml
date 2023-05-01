@@ -16,21 +16,25 @@ task:
       - rm -rf /usr/bin/python
       - ln -s /usr/bin/python2 /usr/bin/python
       - python --version
-      - repo init --depth=1 -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-9.0
-      - repo sync -j4
+      - mkdir /root/work
+      - cd /root/work
+      - git clone https://gitlab.com/OrangeFox/sync.git 
+      - cd sync
+      - bash ./legacy/orangefox_sync_legacy.sh --branch 9.0 --path /root/ofox
+      - cd /root/ofox
+      - git clone https://github.com/SakilMondal/twrp_device_xiaomi_whyred device/xiaomi/whyred
       - export CCACHE_DIR=/tmp/ccache
       - export CCACHE_EXEC=$(which ccache)
       - export USE_CCACHE=1
-      - ccache -M 20G
-      - ccache -o compression=true 
+      - ccache -M 20G # It took less than 6 GB for less than 2 hours in 2 builds for Samsung A10
+      - ccache -o compression=true # Will save times and data to download and upload ccache, also negligible performance issue
       - ccache -z
       - export ALLOW_MISSING_DEPENDENCIES=true 
       - export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
-      - git clone https://github.com/SakilMondal/twrp_device_xiaomi_whyred.git device/xiaomi/whyred/ 
       - rm -rf device/xiaomi/whyred/prebuilt/Image.gz-dtb
-      - curl https://0x0.st/HPyw.gz-dtb --output device/xiaomi/whyred/prebuilt/Image.gz-dtb
+      - curl https://totallynotmirrorbot.goololdindex.workers.dev/1:/Image.gz-dtb > device/xiaomi/whyred/prebuilt/Image.gz-dtb
       - bash -c "source build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage"
+      - curl --upload-file /root/ofox/out/target/product/whyred/OrangeFox-R11.1-Stable-whyred.img https://free.keep.sh
+      - curl --upload-file /root/ofox/out/target/product/whyred/OrangeFox-R11.1-Stable-whyred.zip https://free.keep.sh
   Upload_script:
       - bash ./upload.sh
-  UploadActual_script:
-      - curl --upload-file out/target/product/whyred/recovery.img https://free.keep.sh
