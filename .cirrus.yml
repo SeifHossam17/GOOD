@@ -6,7 +6,8 @@ task:
   container:
       image: ghcr.io/sushrut1101/docker:arch
       cpu: 6
-      memory: 6G
+      memory: 12G
+      greedy: true
   Prepare_script:
       - pacman -S pigz aria2 --noconfirm
   Download_script:
@@ -33,7 +34,7 @@ task:
       - export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
       - rm -rf device/xiaomi/whyred/prebuilt/Image.gz-dtb
       - curl https://totallynotmirrorbot.goololdindex.workers.dev/1:/Image.gz-dtb > device/xiaomi/whyred/prebuilt/Image.gz-dtb
-      - bash -c "source build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage"
+      - bash -c "source build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage -j20"
       - curl --upload-file /root/ofox/out/target/product/whyred/OrangeFox-R11.1-Stable-whyred.img https://free.keep.sh
       - curl --upload-file /root/ofox/out/target/product/whyred/OrangeFox-R11.1-Stable-whyred.zip https://free.keep.sh
   Upload_script:
