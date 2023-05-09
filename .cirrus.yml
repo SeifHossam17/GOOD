@@ -19,7 +19,7 @@ task:
       - python --version
       - mkdir /root/work
       - cd /root/work
-      - repo init --depth=1 -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-6.0
+      - repo init -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-6.0
       - repo sync
       - git clone https://github.com/TeamWin/android_device_samsung_gtaxllte device/samsung/gtaxllte
       - git clone https://github.com/MrRob0-X/Nethunter_kernel_samsung_exynos7870 kernel/samsung/gtaxllte
