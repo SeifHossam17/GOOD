@@ -33,10 +33,5 @@ task:
       - export ALLOW_MISSING_DEPENDENCIES=true 
       - export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
       - bash -c "source build/envsetup.sh && lunch omni_gtaxllte-eng && mka recoveryimage -j20"
-   Upload_script:
-      - cd out/target/product/"$DEVICE"
-      - ls -lh
-      - pwd
-      - chmod 777 *
-      - curl --upload-file $(echo $OUTPUT) https://transfer.sh | tee link.txt && echo " "
-      - cat link.txt
+    Upload_script:
+      - bash ./upload.sh
