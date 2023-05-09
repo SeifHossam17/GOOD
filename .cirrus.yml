@@ -19,6 +19,7 @@ task:
       - python --version
       - mkdir /root/work
       - cd /root/work
+      - git commit --amend --author "mrx7014 <safen894@gmail.com>"
       - repo init -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-6.0
       - repo sync
       - git clone https://github.com/TeamWin/android_device_samsung_gtaxllte device/samsung/gtaxllte
