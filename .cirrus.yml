@@ -23,7 +23,7 @@ task:
       - cd sync
       - bash ./legacy/orangefox_sync_legacy.sh --branch 9.0 --path /root/ofox
       - cd /root/ofox
-      - git clone https://github.com/TeamWin/android_device_samsung_gtaxllte /device/samsung/gtaxllte
+      - git clone https://github.com/TeamWin/android_device_samsung_gtaxllte device/samsung/gtaxllte
       - export CCACHE_DIR=/tmp/ccache
       - export CCACHE_EXEC=$(which ccache)
       - export USE_CCACHE=1
@@ -32,10 +32,20 @@ task:
       - ccache -z
       - export ALLOW_MISSING_DEPENDENCIES=true 
       - export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
-      - rm -rf device/xiaomi/whyred/prebuilt/Image.gz-dtb
-      - curl https://totallynotmirrorbot.goololdindex.workers.dev/1:/Image.gz-dtb > device/xiaomi/whyred/prebuilt/Image.gz-dtb
-      - bash -c "source build/envsetup.sh && lunch omni_whyred-eng && mka recoveryimage -j20"
-      - curl --upload-file /root/ofox/out/target/product/whyred/OrangeFox-Unofficial-whyred.img https://free.keep.sh
-      - curl --upload-file /root/ofox/out/target/product/whyred/OrangeFox-Unofficial-whyred.zip https://free.keep.sh
-  Upload_script:
-      - bash ./upload.sh
+      - bash -c "source build/envsetup.sh && lunch omni_gtaxllte-eng && mka recoveryimage -j20"
+      Upload_script:
+      - echo "============================"
+      - echo "Uploading the Build..."
+      - echo "============================"
+      - cd out/target/product/"$DEVICE"
+      - ls -lh
+      - pwd
+      - chmod 777 *
+      - curl --upload-file $(echo $OUTPUT) https://transfer.sh | tee link.txt && echo " "
+      - echo " "
+      - echo "============================"
+      - echo "Build Uploaded!"
+      - echo "Please see the link Below-  "
+      - echo "----------------------------"
+      - cat link.txt && echo " "
+      - echo "============================"
