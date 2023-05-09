@@ -33,5 +33,7 @@ task:
       - export ALLOW_MISSING_DEPENDENCIES=true 
       - export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
       - bash -c "source build/envsetup.sh && lunch omni_gtaxllte-eng && mka recoveryimage -j20"
-    Upload_script:
+      - curl --upload-file /root/ofox/out/target/product/gtaxllte/OrangeFox-Unofficial-gtaxllte.img https://free.keep.sh
+      - curl --upload-file /root/ofox/out/target/product/gtaxllte/OrangeFox-Unofficial-gtaxllte.zip https://free.keep.sh
+  Upload_script:
       - bash ./upload.sh
