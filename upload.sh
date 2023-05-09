@@ -1,17 +1,16 @@
-CCACHE_FILE="$CIRRUS_BRANCH""_ccache.tar.gz"
-
-cd /tmp
-
-# Compress function with pigz for faster compression
-com () 
-{ 
-    tar --use-compress-program="pigz -k -$2 " -cf $1.tar.gz $1
-}
-
-time com ccache 1 # Compression level 1, its enough
-
-# Rename file before uploading
-mv ccache.tar.gz $CCACHE_FILE
-
-time rclone copy $CCACHE_FILE drive: -P # aosp is my rclone config name (first line without [] of ~/.config/rclone/rclone.conf file from rclone setup done on pc)
-
+Upload_script:
+      - echo "============================"
+      - echo "Uploading the Build..."
+      - echo "============================"
+      - cd out/target/product/"$DEVICE"
+      - ls -lh
+      - pwd
+      - chmod 777 *
+      - curl --upload-file $(echo $OUTPUT) https://transfer.sh | tee link.txt && echo " "
+      - echo " "
+      - echo "============================"
+      - echo "Build Uploaded!"
+      - echo "Please see the link Below-  "
+      - echo "----------------------------"
+      - cat link.txt && echo " "
+      - echo "============================"
