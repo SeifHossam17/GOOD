@@ -23,7 +23,7 @@ task:
       - cd sync
       - bash ./legacy/orangefox_sync_legacy.sh --branch 9.0 --path /root/ofox
       - cd /root/ofox
-      - git clone https://github.com/SakilMondal/twrp_device_xiaomi_whyred device/xiaomi/whyred
+      - git clone https://github.com/TeamWin/android_device_samsung_gtaxllte /device/samsung/gtaxllte
       - export CCACHE_DIR=/tmp/ccache
       - export CCACHE_EXEC=$(which ccache)
       - export USE_CCACHE=1
