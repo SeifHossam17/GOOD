@@ -1,16 +1,7 @@
-Upload_script:
-      - echo "============================"
-      - echo "Uploading the Build..."
-      - echo "============================"
-      - cd out/target/product/"$DEVICE"
-      - ls -lh
-      - pwd
-      - chmod 777 *
-      - curl --upload-file $(echo $OUTPUT) https://transfer.sh | tee link.txt && echo " "
-      - echo " "
-      - echo "============================"
-      - echo "Build Uploaded!"
-      - echo "Please see the link Below-  "
-      - echo "----------------------------"
-      - cat link.txt && echo " "
-      - echo "============================"
+cd out/target/product/"$DEVICE"
+ls -lh
+pwd
+chmod 777 *
+curl --upload-file $(echo $OUTPUT) https://transfer.sh | tee link.txt && echo " "
+cat link.txt && echo " "
+ 
