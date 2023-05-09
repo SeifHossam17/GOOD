@@ -19,11 +19,10 @@ task:
       - python --version
       - mkdir /root/work
       - cd /root/work
-      - git clone https://gitlab.com/OrangeFox/sync.git 
-      - cd sync
-      - bash ./legacy/orangefox_sync_legacy.sh --branch 9.0 --path /root/ofox
-      - cd /root/ofox
-      - git clone https://github.com/mrx7014/android_device_samsung_gtaxllte_recovery device/samsung/gtaxllte
+      - repo init --depth=1 -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-6.0
+      - repo sync
+      - git clone https://github.com/TeamWin/android_device_samsung_gtaxllte device/samsung/gtaxllte
+      - git clone https://github.com/MrRob0-X/Nethunter_kernel_samsung_exynos7870 kernel/samsung/gtaxllte
       - export CCACHE_DIR=/tmp/ccache
       - export CCACHE_EXEC=$(which ccache)
       - export USE_CCACHE=1
@@ -31,9 +30,6 @@ task:
       - ccache -o compression=true # Will save times and data to download and upload ccache, also negligible performance issue
       - ccache -z
       - export ALLOW_MISSING_DEPENDENCIES=true 
-      - export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
       - bash -c "source build/envsetup.sh && lunch omni_gtaxllte-eng && mka recoveryimage -j20"
-      - curl --upload-file /root/ofox/out/target/product/gtaxlwifi/OrangeFox-Unofficial-gtaxllte.img https://free.keep.sh
-      - curl --upload-file /root/ofox/out/target/product/gtaxlwifi/OrangeFox-Unofficial-gtaxllte.zip https://free.keep.sh
   Upload_script:
       - bash ./upload.sh
