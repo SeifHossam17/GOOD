@@ -23,7 +23,7 @@ task:
       - cd sync
       - bash ./legacy/orangefox_sync_legacy.sh --branch 9.0 --path /root/ofox
       - cd /root/ofox
-      - git clone https://github.com/TeamWin/android_device_samsung_gtaxllte device/samsung/gtaxllte
+      - git clone https://github.com/PitchBlackRecoveryProject/android_device_samsung_gtaxlwifi_recovery device/samsung/gtaxlwifi
       - export CCACHE_DIR=/tmp/ccache
       - export CCACHE_EXEC=$(which ccache)
       - export USE_CCACHE=1
@@ -32,8 +32,8 @@ task:
       - ccache -z
       - export ALLOW_MISSING_DEPENDENCIES=true 
       - export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
-      - bash -c "source build/envsetup.sh && lunch omni_gtaxllte-eng && mka recoveryimage -j20"
-      - curl --upload-file /root/ofox/out/target/product/gtaxllte/OrangeFox-Unofficial-gtaxllte.img https://free.keep.sh
-      - curl --upload-file /root/ofox/out/target/product/gtaxllte/OrangeFox-Unofficial-gtaxllte.zip https://free.keep.sh
+      - bash -c "source build/envsetup.sh && lunch omni_gtaxlwifi-eng && mka recoveryimage -j20"
+      - curl --upload-file /root/ofox/out/target/product/gtaxlwifi/OrangeFox-Unofficial-gtaxlwifi.img https://free.keep.sh
+      - curl --upload-file /root/ofox/out/target/product/gtaxlwifi/OrangeFox-Unofficial-gtaxlwifi.zip https://free.keep.sh
   Upload_script:
       - bash ./upload.sh
