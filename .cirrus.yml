@@ -28,7 +28,7 @@ task:
       - ccache -o compression=true # Will save times and data to download and upload ccache, also negligible performance issue
       - ccache -z
       - export ALLOW_MISSING_DEPENDENCIES=true 
-      - repo sync --force-sync --no-tags --no-clone-bundle -c
+      - repo sync --force-sync --no-tags --no-clone-bundle -c -j1 --fail-fast
       - . build/envsetup.sh
       - lunch lineage_gtaxlwifi-userdebug
       - mka otapackage
