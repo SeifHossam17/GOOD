@@ -17,13 +17,10 @@ task:
       - rm -rf /usr/bin/python
       - ln -s /usr/bin/python2 /usr/bin/python
       - python --version
-      - mkdir /root/work
-      - cd /root/work
-      - git config --global url."https://".insteadOf git://
-      - repo init -u git://github.com/minimal-manifest-twrp/platform_manifest_twrp_omni.git -b twrp-6.0
-      - repo sync
-      - git clone https://github.com/TeamWin/android_device_samsung_gtaxllte device/samsung/gtaxllte
-      - git clone https://github.com/MrRob0-X/Nethunter_kernel_samsung_exynos7870 kernel/samsung/gtaxllte
+      - mkdir lineage-19.1
+      - cd lineage-19.1
+      - repo init -u https://github.com/LineageOS/android.git -b lineage-19.1
+      - git clone https://github.com/SeifHossam17/gtaxl-manifests -b lineage-19.1 .repo/local_manifests
       - export CCACHE_DIR=/tmp/ccache
       - export CCACHE_EXEC=$(which ccache)
       - export USE_CCACHE=1
@@ -31,6 +28,9 @@ task:
       - ccache -o compression=true # Will save times and data to download and upload ccache, also negligible performance issue
       - ccache -z
       - export ALLOW_MISSING_DEPENDENCIES=true 
-      - bash -c "source build/envsetup.sh && lunch omni_gtaxllte-eng && mka recoveryimage -j20"
+      - repo sync --force-sync --no-tags --no-clone-bundle -c
+      - . build/envsetup.sh
+      - lunch lineage_gtaxlwifi-userdebug
+      - mka otapackage
   Upload_script:
       - bash ./upload.sh
