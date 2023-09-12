@@ -1,12 +1,12 @@
 env:
     CIRRUS_SHELL: bash
 task:
-  name: "Build TWRP"
-  timeout_in: 120m
+  name: "Build CrDroid"
+  timeout_in: 240m
   container:
       image: ghcr.io/sushrut1101/docker:arch
-      cpu: 6
-      memory: 12G
+      cpu: 8
+      memory: 16G
       greedy: true
   Prepare_script:
       - pacman -S pigz aria2 --noconfirm
@@ -17,10 +17,10 @@ task:
       - rm -rf /usr/bin/python
       - ln -s /usr/bin/python2 /usr/bin/python
       - python --version
-      - mkdir lineage-19.1
-      - cd lineage-19.1
-      - repo init -u https://github.com/LineageOS/android.git -b lineage-19.1
-      - git clone https://github.com/SeifHossam17/gtaxl-manifests -b lineage-19.1 .repo/local_manifests
+      - mkdir crdroid-12.1
+      - cd crdroid-12.1
+      - repo init -u https://github.com/crdroidandroid/android.git -b 12.1 --git-lfs
+      - git clone https://github.com/mrx7014/gtaxl-manifests.git -b crdroid-12.1 .repo/local_manifests
       - export CCACHE_DIR=/tmp/ccache
       - export CCACHE_EXEC=$(which ccache)
       - export USE_CCACHE=1
@@ -28,9 +28,9 @@ task:
       - ccache -o compression=true # Will save times and data to download and upload ccache, also negligible performance issue
       - ccache -z
       - export ALLOW_MISSING_DEPENDENCIES=true 
-      - repo sync --force-sync --no-tags --no-clone-bundle -c -j1 --fail-fast
-      - . build/envsetup.sh
-      - lunch lineage_gtaxlwifi-userdebug
-      - mka otapackage
+      - repo sync --force-sync --current-branch --no-tags --no-clone-bundle --optimized-fetch --prune -j$(nproc --all)
+      - source build/envsetup.sh
+      - lunch lineage_gtaxllte-userdebug
+      - brunch gtaxllte
   Upload_script:
       - bash ./upload.sh
